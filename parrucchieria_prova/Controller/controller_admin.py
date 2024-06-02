@@ -1,6 +1,6 @@
 import os
 import pickle
-from Model.admin import admin
+from parrucchieria_prova.Model.admin import admin
 
 class controller_admin:
     def __init__(self, db_path):
