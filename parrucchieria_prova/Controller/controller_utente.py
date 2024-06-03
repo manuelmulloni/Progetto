@@ -1,7 +1,7 @@
 import os
 import pickle
 
-from Model.utente import utente
+from parrucchieria_prova.Model.utente import utente
 class controller_utente:
     def __init__(self, db_path):
         self.db_path = db_path

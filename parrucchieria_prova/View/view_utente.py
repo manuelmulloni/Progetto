@@ -1,9 +1,9 @@
 from PyQt6 import QtWidgets
 from PyQt6.QtWidgets import QMessageBox, QInputDialog, QDialog, QTableWidget, QTableWidgetItem, QVBoxLayout
 from PyQt6.uic import loadUi
-from Model.utente import utente
-from Controller.controller_utente import controller_utente
-from Controller.controller_prenotazioni import controller_prenotazioni
+from parrucchieria_prova.Model.utente import utente
+from parrucchieria_prova.Controller.controller_utente import controller_utente
+from parrucchieria_prova.Controller.controller_prenotazioni import controller_prenotazioni
 class view_utente(QtWidgets.QWidget):
     def __init__(self,username):
         super(view_utente,self).__init__()
@@ -11,7 +11,7 @@ class view_utente(QtWidgets.QWidget):
 
         # self.ut = controller_utente('C:\\Users\\manue\\PycharmProjects\\parrucchieria_prova\\File_ui\\viewUtente.ui')    in teoria non serve
 
-        loadUi("C:\\Users\\manue\\PycharmProjects\\parrucchieria_prova\\File_ui\\viewUtente.ui", self)
+        loadUi("C:\\Users\\manue\\Documents\\GitHub\\Progetto\\parrucchieria_prova\\File_ui\\viewUtente.ui", self)
 
         self.setWindowTitle(username)
         self.pushButton_2.clicked.connect(self.view_bookings)
@@ -35,7 +35,7 @@ class view_utente(QtWidgets.QWidget):
             self.view_bookings(self.username)
     def view_profile(self):
         # Get the user's details
-        controller_ut = controller_utente('C:\\Users\\manue\\PycharmProjects\\parrucchieria_prova\\Database\\Lista_Utenti.pickle')
+        controller_ut = controller_utente('C:\\Users\\manue\\Documents\\GitHub\\Progetto\\parrucchieria_prova\\Database\\Lista_Utenti.pickle')
         controller_ut.initialize_user()
         user = controller_ut.get_user(self.username)
 
@@ -51,7 +51,7 @@ class view_utente(QtWidgets.QWidget):
         new_username, ok = QInputDialog.getText(self, 'Change Credentials', 'Enter your new username:')
         new_password, ok = QInputDialog.getText(self, 'Change Credentials', 'Enter your new password:')
 
-        controller_ut2 = controller_utente('C:\\Users\\manue\\PycharmProjects\\parrucchieria_prova\\Database\\Lista_Utenti.pickle')
+        controller_ut2 = controller_utente('C:\\Users\\manue\\Documents\\GitHub\\Progetto\\parrucchieria_prova\\Database\\Lista_Utenti.pickle')
         controller_ut2.initialize_user()
 
         # If the user clicked OK and entered a new username and password
@@ -90,7 +90,7 @@ class view_bookings(QDialog):
         self.layout = QVBoxLayout()
         self.username = username
         pr = controller_prenotazioni(
-            'C:\\Users\\manue\\PycharmProjects\\parrucchieria_prova\\Database\\Lista_Prenotazioni.pickle')
+            'C:\Users\\manue\\Documents\\GitHub\\Progetto\\parrucchieria_prova\\Database\\Lista_Prenotazioni.pickle')
         pr.initialize_prenotazioni()
 
         # Create a table widget
@@ -125,7 +125,7 @@ class view_bookings(QDialog):
 
         # Get the controller for the bookings
         pr = controller_prenotazioni(
-            'C:\\Users\\manue\\PycharmProjects\\parrucchieria_prova\\Database\\Lista_Prenotazioni.pickle')
+            'C:\Users\\manue\\Documents\\GitHub\\Progetto\\parrucchieria_prova\\Database\\Lista_Prenotazioni.pickle')
         pr.initialize_prenotazioni()
 
         # Get the user's bookings

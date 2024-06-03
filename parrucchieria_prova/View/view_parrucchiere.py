@@ -1,15 +1,15 @@
 from PyQt6.QtWidgets import QWidget, QMessageBox, QInputDialog
 from PyQt6.uic import loadUi
-from Controller.controller_prenotazioni import controller_prenotazioni
-from Controller.controller_parrucchiere import controller_parrucchiere
-from Model.parrucchiere import parrucchiere
+from parrucchieria_prova.Controller.controller_prenotazioni import controller_prenotazioni
+from parrucchieria_prova.Controller.controller_parrucchiere import controller_parrucchiere
+from parrucchieria_prova.Model.parrucchiere import parrucchiere
 class view_parrucchiere(QWidget):
     def __init__(self, username):
         super(view_parrucchiere, self).__init__()
         self.username = username
 
         # Load the UI
-        loadUi("C:\\Users\\manue\\PycharmProjects\\parrucchieria_prova\\File_ui\\viewparrucchiere.ui", self)
+        loadUi("C:\\Users\\manue\\Documents\\GitHub\\Progetto\\parrucchieria_prova\\File_ui\\viewparrucchiere.ui", self)
 
         # Set the window title
         self.setWindowTitle("Parrucchiere Page")
@@ -22,7 +22,7 @@ class view_parrucchiere(QWidget):
 
 
     def view_bookings(self):
-        prenotazioni = controller_prenotazioni('C:\\Users\\manue\\PycharmProjects\\parrucchieria_prova\\Database\\Lista_Prenotazioni.pickle')
+        prenotazioni = controller_prenotazioni('C:\Users\\manue\\Documents\\GitHub\\Progetto\\parrucchieria_prova\\Database\\Lista_Prenotazioni.pickle')
         prenotazioni.initialize_prenotazioni()
         bookings_info = ""
         for prenotazione in prenotazioni.prenotazioni:
@@ -35,14 +35,14 @@ class view_parrucchiere(QWidget):
         elif self.comboBox.currentText() == "Modifica Profilo":
             self.modifica_profilo()
     def view_profile(self):
-        parrucchiere = controller_parrucchiere('C:\\Users\\manue\\PycharmProjects\\parrucchieria_prova\\Database\\Lista_Parrucchieri.pickle')
+        parrucchiere = controller_parrucchiere('C:\\Users\\manue\\Documents\\GitHub\\Progetto\\parrucchieria_prova\\Database\\Lista_Parrucchieri.pickle')
         parrucchiere.initialize_user()
         for par in parrucchiere.parrucchieri:
             if par['username'] == self.username:
                 return QMessageBox.information(self, "Profile", f"Username: {par['username']}\nPassword: {par['password']}")
 
     def modifica_profilo(self):
-        parru = controller_parrucchiere('C:\\Users\\manue\\PycharmProjects\\parrucchieria_prova\\Database\\Lista_Parrucchieri.pickle')
+        parru = controller_parrucchiere('C:\\Users\\manue\\Documents\\GitHub\\Progetto\\parrucchieria_prova\\Database\\Lista_Parrucchieri.pickle')
         parru.initialize_user()
         new_username, ok = QInputDialog.getText(self, 'Change Credentials', 'Enter your new username:')
         new_password, ok = QInputDialog.getText(self, 'Change Credentials', 'Enter your new password:')

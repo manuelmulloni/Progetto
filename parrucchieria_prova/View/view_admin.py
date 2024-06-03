@@ -1,18 +1,18 @@
 from PyQt6 import QtWidgets
 from PyQt6.QtWidgets import QMessageBox, QInputDialog, QDialog, QVBoxLayout, QTableWidget, QTableWidgetItem
 from PyQt6.uic import loadUi
-from Controller.controller_prenotazioni import controller_prenotazioni
-from Controller.controller_admin import controller_admin
-from Controller.controller_utente import controller_utente
-from Controller.controller_parrucchiere import controller_parrucchiere
+from parrucchieria_prova.Controller.controller_prenotazioni import controller_prenotazioni
+from parrucchieria_prova.Controller.controller_admin import controller_admin
+from parrucchieria_prova.Controller.controller_utente import controller_utente
+from parrucchieria_prova.Controller.controller_parrucchiere import controller_parrucchiere
 
 class view_admin(QtWidgets.QWidget):
      def __init__(self,username):
          super(view_admin, self).__init__()
          self.username = username
-         self.ad = controller_admin('C:\\Users\\manue\\PycharmProjects\\parrucchieria_prova\\File_ui\\viewAdmin.ui')
+         self.ad = controller_admin('C:\\Users\\manue\\Documents\\GitHub\\Progetto\\parrucchieria_prova\\Database\\Lista_Admin.pickle')
 
-         loadUi("C:\\Users\\manue\\PycharmProjects\\parrucchieria_prova\\File_ui\\viewAdmin.ui", self)
+         loadUi("C:\\Users\\manue\\Documents\\GitHub\\Progetto\\parrucchieria_prova\\File_ui\\viewAdmin.ui", self)
          self.setWindowTitle(username)
          self.VediUtenti.clicked.connect(self.view_and_delete_users)
          self.pushButton_2.clicked.connect(self.view_and_delete_bookings)
@@ -68,7 +68,7 @@ class view_admin(QtWidgets.QWidget):
 
      def view_hairdressers(self):
          parrucchiere_controller = controller_parrucchiere(
-             'C:\\Users\\manue\\PycharmProjects\\parrucchieria_prova\\Database\\Lista_Parrucchieri.pickle')
+             'C:\\Users\\manue\\Documents\\GitHub\\Progetto\\parrucchieria_prova\\Database\\Lista_Parrucchieri.pickle')
 
          parrucchiere_controller.initialize_user()
          # Get all hairdressers
@@ -85,7 +85,7 @@ class view_admin(QtWidgets.QWidget):
      def change_hairdressers(self):
         # Create an instance of controller_parrucchiere
         parrucchiere_controller = controller_parrucchiere(
-            'C:\\Users\\manue\\PycharmProjects\\parrucchieria_prova\\Database\\Lista_Parrucchieri.pickle')
+            'C:\\Users\\manue\\Documents\\GitHub\\Progetto\\parrucchieria_prova\\Database\\Lista_Parrucchieri.pickle')
 
         # Ask the user for the username of the hairdresser they want to update
         old_username, ok = QInputDialog.getText(self, 'Update Hairdresser',
@@ -116,7 +116,7 @@ class view_admin(QtWidgets.QWidget):
      def delete_hairdressers(self):
         # Create an instance of controller_parrucchiere
         parrucchiere_controller = controller_parrucchiere(
-            'C:\\Users\\manue\\PycharmProjects\\parrucchieria_prova\\Database\\Lista_Parrucchieri.pickle')
+            'C:\\Users\\manue\\Documents\\GitHub\\Progetto\\parrucchieria_prova\\Database\\Lista_Parrucchieri.pickle')
 
         # Ask the user for the username of the hairdresser they want to delete
         username_to_delete, ok = QInputDialog.getText(self, 'Delete Hairdresser',
@@ -140,7 +140,7 @@ class view_admin(QtWidgets.QWidget):
      def add_hairdressers(self):
          # Create an instance of controller_parrucchiere
          parrucchiere_controller = controller_parrucchiere(
-             'C:\\Users\\manue\\PycharmProjects\\parrucchieria_prova\\Database\\Lista_Parrucchieri.pickle')
+             'C:\\Users\\manue\\Documents\\GitHub\\Progetto\\parrucchieria_prova\\Database\\Lista_Parrucchieri.pickle')
 
          # Ask the user for the username and password of the new hairdresser
          new_username, ok = QInputDialog.getText(self, 'Add Hairdresser', 'Enter the username of the new hairdresser:')
@@ -170,7 +170,7 @@ class vedi_prenotazioni(QDialog):
         self.layout = QVBoxLayout()
 
         pr = controller_prenotazioni(
-            'C:\\Users\\manue\\PycharmProjects\\parrucchieria_prova\\Database\\Lista_Prenotazioni.pickle')
+            'C:\Users\\manue\\Documents\\GitHub\\Progetto\\parrucchieria_prova\\Database\\Lista_Prenotazioni.pickle')
         pr.initialize_prenotazioni()
 
         # Create a table widget
@@ -205,7 +205,7 @@ class vedi_prenotazioni(QDialog):
 
         # Get the controller for the bookings
         pr = controller_prenotazioni(
-            'C:\\Users\\manue\\PycharmProjects\\parrucchieria_prova\\Database\\Lista_Prenotazioni.pickle')
+            'C:\Users\\manue\\Documents\\GitHub\\Progetto\\parrucchieria_prova\\Database\\Lista_Prenotazioni.pickle')
         pr.initialize_prenotazioni()
 
         # Get the user's bookings
@@ -233,7 +233,7 @@ class vedi_utenti(QDialog):
 
         # Create an instance of controller_utente
         utente_controller = controller_utente(
-            'C:\\Users\\manue\\PycharmProjects\\parrucchieria_prova\\Database\\Lista_Utenti.pickle')
+            'C:\\Users\\manue\\Documents\\GitHub\\Progetto\\parrucchieria_prova\\Database\\Lista_Utenti.pickle')
         utente_controller.initialize_user()
         # Create a table widget
         self.tableWidget = QTableWidget()
@@ -265,7 +265,7 @@ class vedi_utenti(QDialog):
 
         # Create an instance of controller_utente
         utente_controller = controller_utente(
-            'C:\\Users\\manue\\PycharmProjects\\parrucchieria_prova\\Database\\Lista_Utenti.pickle')
+            'C:\\Users\\manue\\Documents\\GitHub\\Progetto\\parrucchieria_prova\\Database\\Lista_Utenti.pickle')
         utente_controller.initialize_user()
         # Find and delete the clicked user
         for user in utente_controller.users:

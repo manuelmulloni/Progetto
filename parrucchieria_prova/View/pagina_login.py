@@ -1,13 +1,13 @@
 from PyQt6.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton, QLabel, QLineEdit, QMessageBox, \
     QInputDialog
 import sys
-from Controller.controller_utente import controller_utente
-from Controller.controller_admin import controller_admin
-from View.view_utente import view_utente
-from View.view_admin import view_admin
-from Model.admin import admin
-from Model.utente import utente
-import Database
+from parrucchieria_prova.Controller.controller_utente import controller_utente
+from parrucchieria_prova.Controller.controller_admin import controller_admin
+from parrucchieria_prova.View.view_utente import view_utente
+from parrucchieria_prova.View.view_admin import view_admin
+from parrucchieria_prova.Model.admin import admin
+from parrucchieria_prova.Model.utente import utente
+import parrucchieria_prova.Database
 class pagina_login(QWidget):
     def __init__(self):
         super().__init__()
@@ -43,9 +43,9 @@ class pagina_login(QWidget):
         username = self.username_input.text()
         password = self.password_input.text()
         user_controller = controller_utente(
-            'C:\\Users\\manue\\PycharmProjects\\parrucchieria_prova\\Database\\Lista_Utenti.pickle')
+            'C:\\Users\\manue\\Documents\\GitHub\\Progetto\\parrucchieria_prova\\Database\\Lista_Utenti.pickle')
         admin_controller = controller_admin(
-            'C:\\Users\\manue\\PycharmProjects\\parrucchieria_prova\\Database\\Lista_Admin.pickle')
+            'C:\\Users\\manue\\Documents\\GitHub\\Progetto\\parrucchieria_prova\\Database\\Lista_Admin.pickle')
         admin_controller.initialize_user()
         user_controller.initialize_user()  #forse rivedere qui come si comporta
         print(admin_controller.admins)
@@ -72,7 +72,7 @@ class pagina_login(QWidget):
         username = self.username_input.text()
         password = self.password_input.text()
         user_controller = controller_utente(
-            'C:\\Users\\manue\\PycharmProjects\\parrucchieria_prova\\Database\\Lista_Utenti.pickle')
+            'C:\\Users\\manue\\Documents\\GitHub\\Progetto\\parrucchieria_prova\\Database\\Lista_Utenti.pickle')
         user_controller.initialize_user()
         for user in user_controller.users:
             if user['username'] == username:

@@ -1,7 +1,7 @@
 import os
 import pickle
 
-from Model.prenotazioni import prenotazioni
+from parrucchieria_prova.Model.prenotazioni import prenotazioni
 class controller_prenotazioni:
     def __init__(self, db_path):
         self.db_path = db_path

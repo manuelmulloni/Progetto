@@ -1,6 +1,6 @@
 import os
 import pickle
-from Model.parrucchiere import parrucchiere
+from parrucchieria_prova.Model.parrucchiere import parrucchiere
 
 class controller_parrucchiere:
     def __init__(self, db_path):
