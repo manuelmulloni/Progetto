@@ -10,7 +10,7 @@ class view_admin(QtWidgets.QWidget):
      def __init__(self,username):
              super(view_admin, self).__init__()
              self.username = username
-             self.ad = controller_admin('C:\\Users\\manue\\Documents\\GitHub\\Progetto\\parrucchieria_prova\\Database\\Lista_Admin.pickle')
+             self.ad = controller_admin()
 
              loadUi("C:\\Users\\manue\\Documents\\GitHub\\Progetto\\parrucchieria_prova\\File_ui\\viewAdmin.ui", self)
              self.setWindowTitle(username)
@@ -99,9 +99,7 @@ class view_admin(QtWidgets.QWidget):
 
      def change_hairdressers(self):
                  # Create an instance of controller_parrucchiere
-                 parrucchiere_controller = controller_parrucchiere(
-                     'C:\\Users\\manue\\Documents\\GitHub\\Progetto\\parrucchieria_prova\\Database\\Lista_Parrucchieri.pickle')
-
+                 parrucchiere_controller = controller_parrucchiere
                  # Load the hairdressers data
                  try:
                      parrucchiere_controller.initialize_user()
@@ -156,9 +154,7 @@ class view_admin(QtWidgets.QWidget):
 
      def add_hairdressers(self):
          # Create an instance of controller_parrucchiere
-         parrucchiere_controller = controller_parrucchiere(
-             'C:\\Users\\manue\\Documents\\GitHub\\Progetto\\parrucchieria_prova\\Database\\Lista_Parrucchieri.pickle')
-
+         parrucchiere_controller = controller_parrucchiere()
          try:
              # Load the existing hairdressers
              parrucchiere_controller.initialize_user()
@@ -214,8 +210,7 @@ class vedi_prenotazioni(QDialog):
         self.setWindowTitle("Prenotazioni")
         self.layout = QVBoxLayout()
 
-        pr = controller_prenotazioni(
-            'C:\\Users\\manue\\Documents\\GitHub\\Progetto\\parrucchieria_prova\\Database\\Lista_Prenotazioni.pickle')
+        pr = controller_prenotazioni()
         pr.initialize_prenotazioni()
 
         # Create a table widget
@@ -258,8 +253,7 @@ class vedi_prenotazioni(QDialog):
             return
 
         # Get the controller for the bookings
-        pr = controller_prenotazioni(
-            'C:\\Users\\manue\\Documents\\GitHub\\Progetto\\parrucchieria_prova\\Database\\Lista_Prenotazioni.pickle')
+        pr = controller_prenotazioni()
 
         try:
             # Load the bookings
@@ -290,8 +284,7 @@ class vedi_utenti(QDialog):
         self.layout = QVBoxLayout()
 
         # Create an instance of controller_utente
-        utente_controller = controller_utente(
-            'C:\\Users\\manue\\Documents\\GitHub\\Progetto\\parrucchieria_prova\\Database\\Lista_Utenti.pickle')
+        utente_controller = controller_utente()
         utente_controller.initialize_user()
         # Create a table widget
         self.tableWidget = QTableWidget()
@@ -332,8 +325,7 @@ class vedi_utenti(QDialog):
             return
 
         # Create an instance of controller_utente
-        utente_controller = controller_utente(
-            'C:\\Users\\manue\\Documents\\GitHub\\Progetto\\parrucchieria_prova\\Database\\Lista_Utenti.pickle')
+        utente_controller = controller_utente()
 
         try:
             # Load the users
@@ -356,8 +348,7 @@ class view_parrucchieri(QDialog):
         super().__init__()
         self.setWindowTitle("Parrucchieri")
         self.layout = QVBoxLayout()
-        pr = controller_parrucchiere(
-            'C:\\Users\\manue\\Documents\\GitHub\\Progetto\\parrucchieria_prova\\Database\\Lista_Parrucchieri.pickle')
+        pr = controller_parrucchiere()
         pr.initialize_user()
 
         # Create a table widget
@@ -398,8 +389,7 @@ class view_parrucchieri(QDialog):
             return
 
             # Create an instance of controller_parrucchiere
-        parrucchiere_controller = controller_parrucchiere(
-            'C:\\Users\\manue\\Documents\\GitHub\\Progetto\\parrucchieria_prova\\Database\\Lista_Parrucchieri.pickle')
+        parrucchiere_controller = controller_parrucchiere()
 
         try:
             # Load the parrucchieri

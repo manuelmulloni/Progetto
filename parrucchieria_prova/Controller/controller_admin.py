@@ -3,8 +3,14 @@ import pickle
 from parrucchieria_prova.Model.admin import admin
 
 class controller_admin:
-    def __init__(self, db_path):
-        self.db_path = db_path
+    def __init__(self, ):
+        cartella_file = 'Database'
+
+        # Nome del file che vuoi trovare
+        nome_file = 'Lista_Admin.pickle'
+
+        # Ottieni il percorso assoluto del file combinando il percorso della directory e il nome del file
+        self.db_path = os.path.abspath(os.path.join(os.path.dirname(__file__), cartella_file, nome_file))
         self.admins = []
 
     def initialize_user(self):

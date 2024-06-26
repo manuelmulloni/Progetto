@@ -42,10 +42,8 @@ class pagina_login(QWidget):
     def check_credentials(self):
         username = self.username_input.text()
         password = self.password_input.text()
-        user_controller = controller_utente(
-            'C:\\Users\\manue\\Documents\\GitHub\\Progetto\\parrucchieria_prova\\Database\\Lista_Utenti.pickle')
-        admin_controller = controller_admin(
-            'C:\\Users\\manue\\Documents\\GitHub\\Progetto\\parrucchieria_prova\\Database\\Lista_Admin.pickle')
+        user_controller = controller_utente()
+        admin_controller = controller_admin()
         admin_controller.initialize_user()
         user_controller.initialize_user()
 
@@ -86,8 +84,7 @@ class pagina_login(QWidget):
     def create_account(self):
         username = self.username_input.text()
         password = self.password_input.text()
-        user_controller = controller_utente(
-            'C:\\Users\\manue\\Documents\\GitHub\\Progetto\\parrucchieria_prova\\Database\\Lista_Utenti.pickle')
+        user_controller = controller_utente()
         user_controller.initialize_user()
 
         for user in user_controller.users:

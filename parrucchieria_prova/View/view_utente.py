@@ -35,7 +35,7 @@ class view_utente(QtWidgets.QWidget):
             self.view_bookings(self.username)
     def view_profile(self):
         # Get the user's details
-        controller_ut = controller_utente('C:\\Users\\manue\\Documents\\GitHub\\Progetto\\parrucchieria_prova\\Database\\Lista_Utenti.pickle')
+        controller_ut = controller_utente()
         controller_ut.initialize_user()
         user = controller_ut.get_user(self.username)
 
@@ -51,7 +51,7 @@ class view_utente(QtWidgets.QWidget):
         new_username, ok = QInputDialog.getText(self, 'Change Credentials', 'Enter your new username:')
         new_password, ok = QInputDialog.getText(self, 'Change Credentials', 'Enter your new password:')
 
-        controller_ut2 = controller_utente('C:\\Users\\manue\\Documents\\GitHub\\Progetto\\parrucchieria_prova\\Database\\Lista_Utenti.pickle')
+        controller_ut2 = controller_utente()
         controller_ut2.initialize_user()
 
         # If the user clicked OK and entered a new username and password
@@ -89,8 +89,7 @@ class view_bookings(QDialog):
         self.setWindowTitle("Prenotazioni")
         self.layout = QVBoxLayout()
         self.username = username
-        pr = controller_prenotazioni(
-            'C:\\Users\\manue\\Documents\\GitHub\\Progetto\\parrucchieria_prova\\Database\\Lista_Prenotazioni.pickle')
+        pr = controller_prenotazioni()
         pr.initialize_prenotazioni()
 
         # Create a table widget
@@ -124,8 +123,7 @@ class view_bookings(QDialog):
         booking_date_to_delete = self.tableWidget.item(row, 1).text()
 
         # Get the controller for the bookings
-        pr = controller_prenotazioni(
-            'C:\\Users\\manue\\Documents\\GitHub\\Progetto\\parrucchieria_prova\\Database\\Lista_Prenotazioni.pickle')
+        pr = controller_prenotazioni()
         pr.initialize_prenotazioni()
 
         # Get the user's bookings

@@ -22,7 +22,7 @@ class view_parrucchiere(QWidget):
 
 
     def view_bookings(self):
-        prenotazioni = controller_prenotazioni('C:\\Users\\manue\\Documents\\GitHub\\Progetto\\parrucchieria_prova\\Database\\Lista_Prenotazioni.pickle')
+        prenotazioni = controller_prenotazioni()
         prenotazioni.initialize_prenotazioni()
         bookings_info = ""
         for prenotazione in prenotazioni.prenotazioni:
@@ -35,14 +35,14 @@ class view_parrucchiere(QWidget):
         elif self.comboBox.currentText() == "Modifica Profilo":
             self.modifica_profilo()
     def view_profile(self):
-        parrucchiere = controller_parrucchiere('C:\\Users\\manue\\Documents\\GitHub\\Progetto\\parrucchieria_prova\\Database\\Lista_Parrucchieri.pickle')
+        parrucchiere = controller_parrucchiere()
         parrucchiere.initialize_user()
         for par in parrucchiere.parrucchieri:
             if par['username'] == self.username:
                 return QMessageBox.information(self, "Profile", f"Username: {par['username']}\nPassword: {par['password']}")
 
     def modifica_profilo(self):
-        parru = controller_parrucchiere('C:\\Users\\manue\\Documents\\GitHub\\Progetto\\parrucchieria_prova\\Database\\Lista_Parrucchieri.pickle')
+        parru = controller_parrucchiere()
         parru.initialize_user()
         new_username, ok = QInputDialog.getText(self, 'Change Credentials', 'Enter your new username:')
         new_password, ok = QInputDialog.getText(self, 'Change Credentials', 'Enter your new password:')
