@@ -8,12 +8,18 @@ class controller_admin:
         self.admins = []
 
     def initialize_user(self):
-        if os.path.getsize(self.db_path) == 0:
+        if os.path.getsize(self.db_path) == []:
             with open(self.db_path, 'wb') as db_file:
                 a = admin('admin', 'parrucca')
                 b = a.get_Admin()
                 self.admins.append(b)
                 self.save_to_file() # cercavo di far diventare admns una lista di dizionari
+        elif os.path.exists(self.db_path):
+            with open(self.db_path, 'wb') as db_file:
+                a = admin('admin', 'parrucca')
+                b = a.get_Admin()
+                self.admins.append(b)
+                self.save_to_file()
         else:
             self.load_from_file()
 

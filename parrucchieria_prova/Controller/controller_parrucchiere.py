@@ -10,12 +10,18 @@ class controller_parrucchiere:
 
 
     def initialize_user(self):
-        if   os.path.getsize(self.db_path) == 0:
+        if os.path.getsize(self.db_path) == []:
           with open(self.db_path, 'wb') as db_file:
             a = parrucchiere('parrucchiere', 'azzer')
             b = a.to_dict()
             self.parrucchieri.append(b)
             self.save_to_file()
+        elif os.path.exists(self.db_path):
+            with open(self.db_path, 'wb') as db_file:
+                a = parrucchiere('parrucchiere', 'azzer')
+                b = a.to_dict()
+                self.parrucchieri.append(b)
+                self.save_to_file()
         else:
             self.load_from_file()
     def load_from_file(self):

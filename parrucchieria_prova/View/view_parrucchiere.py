@@ -22,7 +22,7 @@ class view_parrucchiere(QWidget):
 
 
     def view_bookings(self):
-        prenotazioni = controller_prenotazioni('C:\Users\\manue\\Documents\\GitHub\\Progetto\\parrucchieria_prova\\Database\\Lista_Prenotazioni.pickle')
+        prenotazioni = controller_prenotazioni('C:\\Users\\manue\\Documents\\GitHub\\Progetto\\parrucchieria_prova\\Database\\Lista_Prenotazioni.pickle')
         prenotazioni.initialize_prenotazioni()
         bookings_info = ""
         for prenotazione in prenotazioni.prenotazioni:

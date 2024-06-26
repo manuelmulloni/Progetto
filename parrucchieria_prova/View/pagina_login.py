@@ -47,36 +47,52 @@ class pagina_login(QWidget):
         admin_controller = controller_admin(
             'C:\\Users\\manue\\Documents\\GitHub\\Progetto\\parrucchieria_prova\\Database\\Lista_Admin.pickle')
         admin_controller.initialize_user()
-        user_controller.initialize_user()  #forse rivedere qui come si comporta
+        user_controller.initialize_user()
+
+        """
         print(admin_controller.admins)
         print(type(admin_controller.admins))
         print(user_controller.users)
         print(type(user_controller.users))
+        """
+        try:
+            # Check admin credentials
+            for admin in admin_controller.admins:
+                if (admin['Username'] == username and
+                        admin['Password'] == password and
+                        admin['User_type'] == "Admin"):
+                    self.pagina_admin = view_admin(username)
+                    self.pagina_admin.show()
+                    self.close()
+                    return
 
-        for admin in admin_controller.admins:
-            if admin['Username'] == username and admin['Password'] == password and admin['User_type'] == "Admin":
-                self.pagina_admin = view_admin(username)
-                self.pagina_admin.show()
-                self.close()
-                return
+            # Check user credentials
+            for user in user_controller.users:
+                if (user['username'] == username and
+                        user['password'] == password and
+                        user['user_type'] == "Utente"):
+                    self.pagina_utente = view_utente(username)  # Pass the username to the view_utente constructor
+                    self.pagina_utente.show()  # Show the view_utente page
+                    self.close()
+                    return  # Close the login page
 
-        for user in user_controller.users:
-            if user['username'] == username and user['password'] == password and user['user_type'] == "Utente":
-                self.pagina_utente = view_utente(username)  # Pass the username to the view_utente constructor
-                self.pagina_utente.show()  # Show the view_utente page
-                self.close()
-                return  # Close the login page
-            else:
-                pass
+            # If no match found, show error message
+            QMessageBox.warning(self, "Errore", "Credenziali errate")
+        except Exception as e:
+            # Log the exception (optional)
+            print(f"C'è stato un errore: {e}")
+            QMessageBox.warning(self, "Errore", "Si è verificato un errore. Riprova.")
+
     def create_account(self):
         username = self.username_input.text()
         password = self.password_input.text()
         user_controller = controller_utente(
             'C:\\Users\\manue\\Documents\\GitHub\\Progetto\\parrucchieria_prova\\Database\\Lista_Utenti.pickle')
         user_controller.initialize_user()
+
         for user in user_controller.users:
             if user['username'] == username:
-                QMessageBox.warning(self, "Error", "Username already exists")
+                QMessageBox.warning(self, "Errore", "L'username è stato già utilizzato")
                 return
 
         new_utente = utente(username, password)

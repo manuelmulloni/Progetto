@@ -9,7 +9,13 @@ class controller_prenotazioni:
 
 
     def initialize_prenotazioni(self):
-        if os.path.getsize(self.db_path) == 0:
+        if os.path.getsize(self.db_path) == []:
+            with open(self.db_path, 'wb') as db_file:
+                p = prenotazioni('boh', 'data', 'or', 'nome', 'servizio')
+                b = p.get_Prenotazioni()
+                self.prenotazioni.append(b)
+                self.save_to_file()
+        elif os.path.exists(self.db_path):
             with open(self.db_path, 'wb') as db_file:
                 p = prenotazioni('boh', 'data', 'or', 'nome', 'servizio')
                 b = p.get_Prenotazioni()

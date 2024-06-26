@@ -10,7 +10,13 @@ class controller_utente:
 
 
     def initialize_user(self):
-        if os.path.getsize(self.db_path) == 0:
+        if os.path.getsize(self.db_path) == []:
+            with open(self.db_path, 'wb') as db_file:
+                a = utente('Ut', 'pr')
+                b = a.to_dict()
+                self.users.append(b)
+                pickle.dump(self.users, db_file)
+        elif os.path.exists(self.db_path):
             with open(self.db_path, 'wb') as db_file:
                 a = utente('Ut', 'pr')
                 b = a.to_dict()

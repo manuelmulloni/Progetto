@@ -90,7 +90,7 @@ class view_bookings(QDialog):
         self.layout = QVBoxLayout()
         self.username = username
         pr = controller_prenotazioni(
-            'C:\Users\\manue\\Documents\\GitHub\\Progetto\\parrucchieria_prova\\Database\\Lista_Prenotazioni.pickle')
+            'C:\\Users\\manue\\Documents\\GitHub\\Progetto\\parrucchieria_prova\\Database\\Lista_Prenotazioni.pickle')
         pr.initialize_prenotazioni()
 
         # Create a table widget
@@ -125,7 +125,7 @@ class view_bookings(QDialog):
 
         # Get the controller for the bookings
         pr = controller_prenotazioni(
-            'C:\Users\\manue\\Documents\\GitHub\\Progetto\\parrucchieria_prova\\Database\\Lista_Prenotazioni.pickle')
+            'C:\\Users\\manue\\Documents\\GitHub\\Progetto\\parrucchieria_prova\\Database\\Lista_Prenotazioni.pickle')
         pr.initialize_prenotazioni()
 
         # Get the user's bookings
