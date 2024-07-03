@@ -1,5 +1,5 @@
 import os
-
+import re
 from PyQt6 import QtWidgets, QtCore
 from PyQt6.QtCore import Qt, QDate
 from PyQt6.QtWidgets import QMessageBox, QInputDialog, QDialog, QTableWidget, QTableWidgetItem, QVBoxLayout, \
@@ -128,7 +128,18 @@ class view_utente(QtWidgets.QWidget):
 
                 # Get the time input from the user
                 new_ora, ok_ora = QInputDialog.getText(self, 'Prenota', 'Inserisci l\'ora (hh:mm):')
+
                 if not ok_ora or not new_ora.strip():
+                    raise ValueError("Ora non valida: inserisci un'ora nel formato hh:mm")
+
+                # Validate the time format using regular expression
+                time_pattern = re.compile(r'^\d{2}:\d{2}$')
+                if not time_pattern.match(new_ora.strip()):
+                    raise ValueError("Ora non valida: inserisci un'ora nel formato hh:mm")
+
+                # Additional check for valid hour and minute ranges
+                hours, minutes = map(int, new_ora.split(':'))
+                if hours < 0 or hours > 23 or minutes < 0 or minutes > 59:
                     raise ValueError("Ora non valida: inserisci un'ora nel formato hh:mm")
 
                 # Read the list of hairdressers from the controller

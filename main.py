@@ -6,4 +6,4 @@ p = pagina_login()
 p.show()
 
 
-#problema riguardane steso username e password del parrucchiere e stessa cosa per l'admin
+#mettere una conferma magari, bottone esci
