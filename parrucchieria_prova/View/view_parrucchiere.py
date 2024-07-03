@@ -1,3 +1,5 @@
+import os
+
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QWidget, QMessageBox, QInputDialog, QTableWidget, QTableWidgetItem, QVBoxLayout, QDialog, \
     QAbstractItemView
@@ -11,8 +13,10 @@ class view_parrucchiere(QWidget):
         self.username = username
 
         # Load the UI
-        loadUi("C:\\Users\\manue\\Documents\\GitHub\\Progetto\\parrucchieria_prova\\File_ui\\viewparrucchiere.ui", self)
-
+        cartella_file = 'File_ui'
+        nome_file = 'viewparrucchiere.ui'
+        self.db_path = os.path.abspath(os.path.join(os.path.dirname(__file__), cartella_file, nome_file))
+        loadUi(self.db_path, self)
         # Set the window title
         self.setWindowTitle("Parrucchiere Page")
 

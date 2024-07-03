@@ -1,3 +1,5 @@
+import os
+
 from PyQt6 import QtWidgets
 from PyQt6.QtWidgets import QMessageBox, QInputDialog, QDialog, QVBoxLayout, QTableWidget, QTableWidgetItem
 from PyQt6.uic import loadUi
@@ -12,7 +14,11 @@ class view_admin(QtWidgets.QWidget):
              self.username = username
              self.ad = controller_admin()
 
-             loadUi("C:\\Users\\manue\\Documents\\GitHub\\Progetto\\parrucchieria_prova\\File_ui\\viewAdmin.ui", self)
+             cartella_file = 'File_ui'
+             nome_file = 'viewAdmin.ui'
+             self.db_path = os.path.abspath(os.path.join(os.path.dirname(__file__), cartella_file, nome_file))
+             loadUi(self.db_path, self)
+
              self.setWindowTitle(username)
              self.VediUtenti.clicked.connect(self.view_and_delete_users)
              self.pushButton_2.clicked.connect(self.view_and_delete_bookings)

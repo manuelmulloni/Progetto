@@ -1,3 +1,5 @@
+import os
+
 from PyQt6 import QtWidgets, QtCore
 from PyQt6.QtCore import Qt, QDate
 from PyQt6.QtWidgets import QMessageBox, QInputDialog, QDialog, QTableWidget, QTableWidgetItem, QVBoxLayout, \
@@ -15,7 +17,10 @@ class view_utente(QtWidgets.QWidget):
         super(view_utente, self).__init__()
         self.username = username
 
-        loadUi("C:\\Users\\manue\\Documents\\GitHub\\Progetto\\parrucchieria_prova\\File_ui\\viewUtente.ui", self)
+        cartella_file = 'File_ui'
+        nome_file = 'viewUtente.ui'
+        self.db_path = os.path.abspath(os.path.join(os.path.dirname(__file__), cartella_file, nome_file))
+        loadUi(self.db_path, self)
 
         self.setWindowTitle(username)
         self.pushButton_2.clicked.connect(self.prenota)
