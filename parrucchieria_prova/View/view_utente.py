@@ -10,12 +10,14 @@ from parrucchieria_prova.Controller.controller_utente import controller_utente
 from parrucchieria_prova.Controller.controller_prenotazioni import controller_prenotazioni
 from parrucchieria_prova.Controller.controller_parrucchiere import controller_parrucchiere
 from PyQt6.uic import loadUi
+from parrucchieria_prova.Model.utente import utente
+
 
 
 class view_utente(QtWidgets.QWidget):
     def __init__(self, username):
         super(view_utente, self).__init__()
-        self.username = username
+        self.username = username  #erroer dovuto da questo
 
         cartella_file = 'File_ui'
         nome_file = 'viewUtente.ui'
@@ -59,34 +61,49 @@ class view_utente(QtWidgets.QWidget):
         except Exception as e:
             QMessageBox.critical(self, "Profilo", f"C'è stato un errore nel mentre cercavi il profilo: {e}")
 
-    def change_credentials(self):
+    def change_credentials(self):  #errore nel rivedere il profilo
         try:
-            utente = controller_utente()
-            utente.initialize_user()
+            # Initialize user controller
+            utent = controller_utente()
+            utent.initialize_user()
 
+            # Get new username and validate
             new_username, ok_username = QInputDialog.getText(self, 'Cambia credenziali', 'Inserisci nuovo username:')
             if not ok_username or not new_username.strip():
                 raise ValueError("Username non valido")
 
+            # Check if new username already exists
+            if any(user['username'] == new_username for user in utent.users if user['username'] != self.username):
+                raise ValueError("Username già esistente")
+
+            # Get new password and validate
             new_password, ok_password = QInputDialog.getText(self, 'Cambia credenziali', 'Inserisci la nuova password:')
             if not ok_password or not new_password.strip():
                 raise ValueError("Password non valida")
 
-            for ut in utente.users:
+            # Find the user and update credentials
+            user_found = False
+            for ut in utent.users:
                 if ut['username'] == self.username:
                     ut['username'] = new_username
                     ut['password'] = new_password
-                    ut.save_to_file()
+                    utent.save_to_file()  # Save changes to file (assuming this method exists)
+                    self.username = new_username
                     QMessageBox.information(self, "Cambia credenziali",
-                                            f"Le credenziali sono state aggiornate con successo.")
-                    return
+                                            "Le credenziali sono state aggiornate con successo.")
+                    user_found = True
+                    break
 
-            QMessageBox.warning(self, "Cambia credenziali", "Profilo non trovato.")
+            if not user_found:
+                QMessageBox.warning(self, "Cambia credenziali", "Profilo non trovato.")
+
         except ValueError as ve:
             QMessageBox.warning(self, "Cambia credenziali", f"Errore: {ve}")
         except Exception as e:
             QMessageBox.critical(self, "Cambia credenziali",
-                                 f"C'è stato un errore mentre cercavi di cambiare le credenziali: {e}")
+                                 f"C'è stato un errore durante l'aggiornamento delle credenziali: {e}")
+
+
 
     def prenota(self):
         try:

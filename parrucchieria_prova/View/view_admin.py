@@ -7,7 +7,6 @@ from parrucchieria_prova.Controller.controller_prenotazioni import controller_pr
 from parrucchieria_prova.Controller.controller_admin import controller_admin
 from parrucchieria_prova.Controller.controller_utente import controller_utente
 from parrucchieria_prova.Controller.controller_parrucchiere import controller_parrucchiere
-
 class view_admin(QtWidgets.QWidget):
      def __init__(self,username):
              super(view_admin, self).__init__()
