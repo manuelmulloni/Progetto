@@ -93,19 +93,28 @@ class pagina_login(QWidget):
         password = self.password_input.text()
         user_controller = controller_utente()
         parruchiere_controller = controller_parrucchiere()
-
+        admin_controller = controller_admin()
+        user_controller.initialize_user()
+        parruchiere_controller.initialize_user()
+        admin_controller.initialize_user()
         try:
+
+            for admin in admin_controller.admins:
+                if admin['Username'] == username:
+                    QMessageBox.warning(self, "Errore", "L'username è già stato utilizzato")
+                    return
+
             # Check if username already exists among parrucchieri
             for parrucchiere in parruchiere_controller.parrucchieri:
                 if parrucchiere['username'] == username:
-                    QMessageBox.warning(self, "Errore", "L'username è già stato utilizzato da un parrucchiere")
+                    QMessageBox.warning(self, "Errore", "L'username è già stato utilizzato")
                     return
 
             # Check if username already exists among users
             user_controller.initialize_user()
             for user in user_controller.users:
                 if user['username'] == username:
-                    QMessageBox.warning(self, "Errore", "L'username è già stato utilizzato da un utente")
+                    QMessageBox.warning(self, "Errore", "L'username è già stato utilizzato")
                     return
 
             # If username is unique, create new utente account

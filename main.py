@@ -6,4 +6,4 @@ p = pagina_login()
 p.show()
 
 
-#gestire cambia parrucchieri e il problema riguardane steso username e password del parrucchiere
+#problema riguardane steso username e password del parrucchiere e stessa cosa per l'admin

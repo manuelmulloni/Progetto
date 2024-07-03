@@ -56,42 +56,59 @@ class view_admin(QtWidgets.QWidget):
                  QMessageBox.information(self, "Admin Profile", profile_info)
 
      def change_credentials(self, old_username):
-                 try:
-                     # Prompt for new username
-                     new_username, ok_username = QInputDialog.getText(self, 'Cambia Credenziali',
-                                                                      'Inserisci il nuovo username:')
-                     if not ok_username or not new_username.strip():
-                         raise ValueError("L'user inserito non è valido")
+         pr = controller_parrucchiere()
+         pr.initialize_user()
+         ut = controller_utente()
+         ut.initialize_user()
 
-                     # Prompt for new password
-                     new_password, ok_password = QInputDialog.getText(self, 'Cambia Credenziali',
-                                                                      'Inserisci la nuova password:')
-                     if not ok_password or not new_password.strip():
-                         raise ValueError("la password inserita non è valida")
+         try:
+             # Prompt for new username
+             new_username, ok_username = QInputDialog.getText(self, 'Cambia Credenziali',
+                                                              'Inserisci il nuovo username:')
 
-                     # Update the credentials if both inputs are valid
-                     if ok_username and ok_password:
-                         self.ad.initialize_user()
-                         for admin in self.ad.admins:
-                             if admin['Username'] == old_username:
-                                 # Update the admin's credentials
-                                 admin['Username'] = new_username
-                                 admin['Password'] = new_password
+             if not ok_username or not new_username.strip():
+                 raise ValueError("L'user inserito non è valido")
 
-                                 # Save the updated list of admins to the file
-                                 self.ad.save_to_file()
-                                 QMessageBox.information(self, "Credenziali cambiate",
-                                                         f"Le credenziali per {old_username} sono state aggiornate.")
-                                 return
+             # Check if new username is already in use by a parrucchiere
+             for parrucchiere in pr.parrucchieri:
+                 if new_username.strip() == parrucchiere['username']:
+                     raise ValueError("Il nuovo username è già in uso da un parrucchiere")
 
-                         # If the admin is not found, show a warning
-                         QMessageBox.warning(self, "Cambia Credenziali", "Admin non trovato.")
+             # Check if new username is already in use by a user
+             for user in ut.users:
+                 if new_username.strip() == user['username']:
+                     raise ValueError("Il nuovo username è già in uso da un utente")
 
-                 except ValueError as e:
-                     QMessageBox.warning(self, "Cambia Credenziali", f"Errore nell'inserimento delle credenziali: {e}")
+             # Prompt for new password
+             new_password, ok_password = QInputDialog.getText(self, 'Cambia Credenziali',
+                                                              'Inserisci la nuova password:')
 
-                 except Exception as e:
-                     QMessageBox.warning(self, "Cambia Credenziali", f"Si è verificato un errore: {e}")
+             if not ok_password or not new_password.strip():
+                 raise ValueError("La password inserita non è valida")
+
+             # Update the credentials if both inputs are valid
+             if ok_username and ok_password:
+                 self.ad.initialize_user()
+                 for admin in self.ad.admins:
+                     if admin['Username'] == old_username:
+                         # Update the admin's credentials
+                         admin['Username'] = new_username.strip()
+                         admin['Password'] = new_password.strip()
+
+                         # Save the updated list of admins to the file
+                         self.ad.save_to_file()
+                         QMessageBox.information(self, "Credenziali cambiate",
+                                                 f"Le credenziali per {old_username} sono state aggiornate.")
+                         return
+
+                 # If the admin is not found, show a warning
+                 QMessageBox.warning(self, "Cambia Credenziali", "Admin non trovato.")
+
+         except ValueError as e:
+             QMessageBox.warning(self, "Cambia Credenziali", f"Errore nell'inserimento delle credenziali: {e}")
+
+         except Exception as e:
+             QMessageBox.warning(self, "Cambia Credenziali", f"Si è verificato un errore: {e}")
 
      def view_hairdressers(self):
                  try:
