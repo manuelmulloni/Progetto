@@ -72,6 +72,7 @@ class view_parrucchiere(QWidget):
                     par['username'] = new_username
                     par['password'] = new_password
                     parru.save_to_file()  # Salva le modifiche nel file
+                    self.username = new_username
                     QMessageBox.information(self, "Cambia credenziali", f"Le credenziali sono state aggiornate con successo.")
                     return
 
