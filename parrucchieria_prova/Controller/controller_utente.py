@@ -31,6 +31,7 @@ class controller_utente:
             pickle.dump(self.users, db_file)
 
     def add_user(self, user):
+
         self.users.append(user)
         self.save_to_file()
 
@@ -46,12 +47,6 @@ class controller_utente:
             self.save_to_file()
         except ValueError:
             print("Utente non trovato")
-
-    def read_user(self, username):
-        for user in self.users:
-            if user['username'] == username:
-                return user
-        return None
 
     def get_user(self, username):
         for user in self.users:

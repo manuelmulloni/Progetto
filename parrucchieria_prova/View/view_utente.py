@@ -227,7 +227,7 @@ class view_bookings(QDialog):
         self.tableWidget.setItem(row_position, 3, QTableWidgetItem(prenotazione.get('parrucchiere', '')))
         self.tableWidget.setItem(row_position, 4, QTableWidgetItem(prenotazione.get('servizio', '')))
 
-    def delete_selected_booking(self, row, column):
+    def delete_selected_booking(self, row):
         booking_date_to_delete = self.tableWidget.item(row, 1).text()
 
         try:
