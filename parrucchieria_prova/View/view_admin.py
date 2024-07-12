@@ -339,19 +339,17 @@ class vedi_utenti(QDialog):
         self.tableWidget = QTableWidget()
 
         # Set the column count for the table
-        self.tableWidget.setColumnCount(2)
+        self.tableWidget.setColumnCount(3)
 
         # Set the headers for the table
         self.tableWidget.setHorizontalHeaderLabels(["Username", "Password", "User Type"])
 
         # Add the users to the table
-        for i in utente_controller.users:
-            a = 0
+        for index, user in enumerate(utente_controller.users):
             self.tableWidget.insertRow(self.tableWidget.rowCount())
-            self.tableWidget.setItem(a, 0, QTableWidgetItem(i['username']))
-            self.tableWidget.setItem(a, 1, QTableWidgetItem(i['password']))
-            self.tableWidget.setItem(a, 2, QTableWidgetItem(i['user_type']))
-            a += 1
+            self.tableWidget.setItem(index, 0, QTableWidgetItem(user['username']))
+            self.tableWidget.setItem(index, 1, QTableWidgetItem(user['password']))
+            self.tableWidget.setItem(index, 2, QTableWidgetItem(user['user_type']))
 
         # Connect the cellClicked signal to a method that deletes the clicked user
         self.tableWidget.cellClicked.connect(self.delete_selected_user)
