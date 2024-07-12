@@ -99,6 +99,9 @@ class pagina_login(QWidget):
         admin_controller.initialize_user()
         try:
 
+            if not username or not password:
+                QMessageBox.warning(self, "Errore", "Inserisci username e password")
+                return
             for admin in admin_controller.admins:
                 if admin['Username'] == username:
                     QMessageBox.warning(self, "Errore", "L'username è già stato utilizzato")
@@ -127,6 +130,7 @@ class pagina_login(QWidget):
 
         except Exception as e:
             QMessageBox.warning(self, "Errore", f"Si è verificato un errore durante la creazione dell'account: {e}")
+
 
 app = QApplication(sys.argv)
 
