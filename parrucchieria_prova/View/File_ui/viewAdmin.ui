@@ -17,7 +17,7 @@
    <bool>false</bool>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-image: url(:/background/Parte grafica/logo.jpg);</string>
+   <string notr="true"/>
   </property>
   <widget class="QWidget" name="gridLayoutWidget">
    <property name="geometry">
